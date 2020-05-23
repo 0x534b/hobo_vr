@@ -111,4 +111,4 @@ def test_get_i2c_imu_north_up():
 
 
 if __name__ == '__main__':
-    test_get_i2c_imu_north_up()
+    test_get_i2c_imu()

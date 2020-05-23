@@ -149,7 +149,7 @@ class PureIMUProtocol(serial.threaded.Packetizer):
             self.imu.time_of_last_data = time.time()
 
 
-def get_coms_in_range(start=0, stop=10):
+def get_coms_in_range(start=0, stop=20):
     coms = []
     for i in range(start, stop):
         try:

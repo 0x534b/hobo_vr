@@ -1,28 +1,24 @@
+# -----------------------------------------------------------------------------
+# Python & OpenGL for Scientific Visualization
+# www.labri.fr/perso/nrougier/python+opengl
+# Copyright (c) 2018, Nicolas P. Rougier
+# Distributed under the 2-Clause BSD License.
+# -----------------------------------------------------------------------------
+import sys
+import ctypes
 import numpy as np
-from mayavi import mlab
+import moderngl
 
 
-def test_anim_arrows():
-    i = 0
-    x, y, z = np.mgrid[-2:3, -2:3, -2:3]
-    r = np.sqrt(x ** 2 + y ** 2 + z ** 4)
-    u = y * np.sin(r + i) / (r + i + 0.001)
-    v = -x * np.sin(r + i) / (r + i + 0.001)
-    w = np.zeros_like(z)
-    obj = mlab.quiver3d(x, y, z, u, v, w, line_width=3, scale_factor=1)
 
-    @mlab.animate(delay=10)
-    def run_quiver3d():
-        nonlocal i
-        while True:
-            i += 0.1
-            if i > 10:
-                i = -10
-            u = y * np.sin(r + i) / (r + i + 0.001)
-            v = -x * np.sin(r + i) / (r + i + 0.001)
-            w = np.zeros_like(z)
-            obj.mlab_source.set(u=u, v=v, w=w)
-            yield
 
-    run_quiver3d()
-    mlab.show()
+
+n = 2048
+T = np.linspace(0, 20 * 2 * np.pi, n, dtype=np.float32)
+R = np.linspace(.1, np.pi - .1, n, dtype=np.float32)
+X = np.cos(T) * np.sin(R)
+Y = np.sin(T) * np.sin(R)
+Z = np.cos(R)
+P = np.dstack((X, Y, Z)).squeeze()
+
+print(P)
